@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React basic</title>
+  </head>
+  <body>
+    <div id="js-container"></div>
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
+    <script type="text/babel">
+      function Cart({ name, price, discount, img }) {
+        return (
+          <div
+            style={{
+              border: "1px solid gray",
+              marginBottom: "10px",
+              width: "200px",
+              padding: "10px",
+              borderRadius: "7px",
+            }}
+          >
+            {img && <img src={img} width="100" />}
+            <p>{name}</p>
+            {discount && <del>Price:${price}</del>}
+            {!discount && <p>Price:${price}</p>}
+            {discount && <p>Discount price: ${discount}</p>}
+            <button>Add to Cart</button>
+          </div>
+        );
+      }
+      function App() {
+        return (
+          <>
+            <Cart
+              name="Cotton socks"
+              price="10.90"
+              discount="5.49"
+              img="/Exercise/assets/socks.png"
+            />
+            <Cart
+              name="Tennis balls"
+              price="6.00"
+              img="/Exercise/assets/tennis.png"
+            />
+            <Cart
+              name="Plain T-shirt"
+              price="7.99"
+              img="/Exercise/assets/t-shirt.png"
+            />
+          </>
+        );
+      }
+      const container = document.getElementById("js-container");
+      const root = ReactDOM.createRoot(container);
+      root.render(<App />);
+    </script>
+  </body>
+</html>

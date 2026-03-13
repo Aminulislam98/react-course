@@ -12,10 +12,32 @@
     <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
 
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
     <script type="text/babel">
       const container = document.getElementById("js-container");
       const button = <button>Good job!</button>;
-      ReactDOM.createRoot(container).render(button);
+      const paragraph = <p>My name is Aminul islam</p>;
+      const onePackSocks = 10;
+      const tShirt = 8;
+      const totalPriceBeforeShipping = tShirt * 2 + onePackSocks;
+      const shippingCost = 5;
+      const totalCost = totalPriceBeforeShipping + shippingCost;
+      const currentDate = dayjs().format("MMMM D");
+      const currentTime = dayjs().format("HH:mm:ss");
+      const div = (
+        <div>
+          <p>Cotton socks </p>
+          <p>Price: $10 </p>
+          <button>Add to Cart </button>
+          <p>1 Pack socks for $10 and 2 T-shirt for 8 each. </p>
+          <p> Product cost: ${totalPriceBeforeShipping}</p>
+          <p> Shipping cost: ${shippingCost}</p>
+          <p> Total cost: ${totalCost}</p>
+          <p> Today is {currentDate}</p>
+        </div>
+      );
+      const root = ReactDOM.createRoot(container);
+      root.render(div);
     </script>
   </body>
 </html>

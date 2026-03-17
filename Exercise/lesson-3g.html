@@ -15,10 +15,17 @@
     <script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
     <script type="text/babel">
       function App() {
-        function Paragraph() {
-          return <p>Hello, welcome to my website </p>;
+        const [input, setInput] = React.useState("");
+        function showText(event) {
+          setInput(event.target.value);
         }
-        return <Paragraph />;
+
+        return (
+          <div>
+            <input onChange={showText} type="text" placeholder="Type in here" />
+            <p>{input}</p>
+          </div>
+        );
       }
       const container = document.getElementById("js-container");
       const root = ReactDOM.createRoot(container);

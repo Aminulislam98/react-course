@@ -14,11 +14,30 @@
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
     <script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
     <script type="text/babel">
-      function App() {
-        function Paragraph() {
-          return <p>Hello, welcome to my website </p>;
+      function Counter({ countNum, setCountNum }) {
+        function countIncrease() {
+          setCountNum(countNum + 1);
         }
-        return <Paragraph />;
+        return (
+          <div>
+            <button onClick={countIncrease}>
+              Clicked {countNum} {countNum <= 1 ? "time" : " times"}
+            </button>
+          </div>
+        );
+      }
+      function App() {
+        const [countNum, setCountNum] = React.useState(0);
+        function reset() {
+          setCountNum(0);
+        }
+        return (
+          <div>
+            <Counter countNum={countNum} setCountNum={setCountNum} />
+            <Counter countNum={countNum} setCountNum={setCountNum} />
+            <button onClick={reset}>Reset</button>
+          </div>
+        );
       }
       const container = document.getElementById("js-container");
       const root = ReactDOM.createRoot(container);

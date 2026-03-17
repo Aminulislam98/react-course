@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Chatbot</title>
+    <link rel="stylesheet" href="chatBot.css" />
   </head>
   <body>
     <div class="js-container"></div>
@@ -62,31 +63,42 @@
           }
         }
         return (
-          <>
+          <div className="chatbot-container">
             <input
+              className="placeHolder"
               onKeyDown={sendMessageByKey}
               onChange={saveInputMessage}
               placeholder="Send a message to Chatbot"
               size="30"
               value={inputText}
             />
-            <button onClick={sendMessage}>Send</button>
-          </>
+            <button className="sendButton" onClick={sendMessage}>
+              Send
+            </button>
+          </div>
         );
       }
       function ChatMessage({ message, sender }) {
         return (
-          <div>
-            {sender === "robot" && <img src="robot.png" width="50" />}
-            {message}
-            {sender === "user" && <img src="user.png" width="50" />}
+          <div
+            className={
+              sender === "user" ? "chat-message-user" : "chat-message-robot"
+            }
+          >
+            {sender === "robot" && (
+              <img className="chat-message-profile" src="robot.png" />
+            )}
+            <div className="chat-message-text">{message}</div>
+            {sender === "user" && (
+              <img className="chat-message-profile" src="user.png" />
+            )}
           </div>
         );
       }
 
       function ChatMessages({ chatMessages }) {
         return (
-          <>
+          <div className="chat-message-container">
             {chatMessages.map((chatMessage) => {
               return (
                 <ChatMessage
@@ -96,7 +108,7 @@
                 />
               );
             })}
-          </>
+          </div>
         );
       }
       function App() {
@@ -123,13 +135,13 @@
           },
         ]);
         return (
-          <>
+          <div className="app-container">
+            <ChatMessages chatMessages={chatMessages} />
             <ChatInput
               chatMessages={chatMessages}
               setChatMessages={setChatMessages}
             />
-            <ChatMessages chatMessages={chatMessages} />
-          </>
+          </div>
         );
       }
       const container = document.querySelector(".js-container");

@@ -17,10 +17,16 @@
     <script type="text/babel">
       function ChatInput({ chatMessages, setChatMessages }) {
         const [inputText, setInputText] = React.useState("");
+        const [isLoading, setIsLoading] = React.useState(false);
         function saveInputMessage(event) {
           setInputText(event.target.value);
         }
-        function sendMessage() {
+        async function sendMessage() {
+          if (isLoading || inputText === "") {
+            return;
+          }
+          setIsLoading(true);
+          setInputText("");
           const newSendMessage = [
             ...chatMessages,
             {
@@ -29,8 +35,15 @@
               id: crypto.randomUUID(),
             },
           ];
-          setChatMessages(newSendMessage);
-          const response = Chatbot.getResponse(inputText);
+          setChatMessages([
+            ...chatMessages,
+            {
+              message: "Loading...,",
+              sender: "robot",
+              id: crypto.randomUUID(),
+            },
+          ]);
+          const response = await Chatbot.getResponseAsync(inputText);
           setChatMessages([
             ...newSendMessage,
             {
@@ -39,11 +52,19 @@
               id: crypto.randomUUID(),
             },
           ]);
-          setInputText("");
+          setIsLoading(false);
+        }
+        function sendMessageByKey(event) {
+          if (event.key === "Enter") {
+            sendMessage();
+          } else if (event.key === "Escape") {
+            setInputText("");
+          }
         }
         return (
           <>
             <input
+              onKeyDown={sendMessageByKey}
               onChange={saveInputMessage}
               placeholder="Send a message to Chatbot"
               size="30"

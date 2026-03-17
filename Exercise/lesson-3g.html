@@ -19,10 +19,23 @@
         function showText(event) {
           setInput(event.target.value);
         }
+        function reset() {
+          setInput("");
+        }
+        function example() {
+          setInput("Aminul islam");
+        }
 
         return (
           <div>
-            <input onChange={showText} type="text" placeholder="Type in here" />
+            <input
+              value={input}
+              onChange={showText}
+              type="text"
+              placeholder="Type in here"
+            />
+            <button onClick={reset}>Reset</button>
+            <button onClick={example}>Example</button>
             <p>{input}</p>
           </div>
         );

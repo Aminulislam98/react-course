@@ -27,8 +27,7 @@
           >
             {img && <img src={img} width="100" />}
             <p>{name}</p>
-            {discount && <del>Price:${price}</del>}
-            {!discount && <p>Price:${price}</p>}
+            {discount ? <del>Price:${price}</del> : <p>Price:${price}</p>}
             {discount && <p>Discount price: ${discount}</p>}
             <button>Add to Cart</button>
           </div>
